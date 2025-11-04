@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+# Usage:
+# increment_snapshot \
+#   <subvolume_to_snapshot> \
+#   <new_snapshot_name>  \
+#   <parent_snapshot> \
+#   <destination>
+
+btrfs subvolume snapshot -r $1 $2
+btrfs send -p $3 $2 | btrfs receive $4
